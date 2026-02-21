@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Generator
 
 from . import config as agentic_config
-from .runtime import is_strands_available, run_agent_text, stream_agent_text
+from .runtime import _format_time_response, _is_time_query, is_strands_available, run_agent_text, stream_agent_text
 import worker_manager
 
 
@@ -25,6 +25,8 @@ class AgenticService:
     def chat(self, message: str, session_id: str) -> str:
         if not self.enabled():
             raise RuntimeError("Agentic workflows are disabled (AGENTIC_ENABLED=0).")
+        if _is_time_query(message):
+            return _format_time_response(message)
         if self.ready():
             return run_agent_text(message=message, session_id=session_id)
         if agentic_config.AGENTIC_ALLOW_CLASSIC_FALLBACK:
@@ -36,6 +38,9 @@ class AgenticService:
     def stream_chat(self, message: str, session_id: str) -> Generator[str, None, None]:
         if not self.enabled():
             raise RuntimeError("Agentic workflows are disabled (AGENTIC_ENABLED=0).")
+        if _is_time_query(message):
+            yield _format_time_response(message)
+            return
         if self.ready():
             yield from stream_agent_text(message=message, session_id=session_id)
             return

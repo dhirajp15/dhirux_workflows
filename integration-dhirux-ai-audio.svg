@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .box { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 12; ry: 12; }
+      .agent { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 12; ry: 12; }
+      .worker { fill: #ecfeff; stroke: #0891b2; stroke-width: 2; rx: 12; ry: 12; }
+      .store { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 12; ry: 12; }
+      .text { font: 600 16px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 500 13px Arial, sans-serif; fill: #475569; }
+      .arrow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#a); }
+    </style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="520"/>
+  <text class="title" x="28" y="44">How dhirux_workflows Connects to dhirux_ai_audio</text>
+
+  <rect class="box" x="28" y="90" width="250" height="100"/>
+  <text class="text" x="48" y="128">Browser Chat UI</text>
+  <text class="small" x="48" y="152">Classic / Agentic toggle</text>
+
+  <rect class="box" x="328" y="90" width="290" height="100"/>
+  <text class="text" x="348" y="128">dhirux_ai_audio Flask</text>
+  <text class="small" x="348" y="152">agentic.py blueprint routes</text>
+
+  <rect class="agent" x="668" y="60" width="504" height="160"/>
+  <text class="text" x="688" y="98">dhirux_workflows package (separate repo)</text>
+  <text class="small" x="688" y="122">service.py -> runtime.py -> QwenWorkerModel</text>
+  <text class="small" x="688" y="146">tools.py: current_time_utc + policy logic</text>
+  <text class="small" x="688" y="170">Uses Strands Agent when available</text>
+  <text class="small" x="688" y="194">Fallback path to classic chat if configured</text>
+
+  <rect class="worker" x="328" y="270" width="360" height="130"/>
+  <text class="text" x="348" y="308">worker_manager chat worker</text>
+  <text class="small" x="348" y="332">single Qwen execution lane (GPU mutex)</text>
+  <text class="small" x="348" y="356">stream_chat / dispatch_chat</text>
+
+  <rect class="store" x="738" y="270" width="434" height="130"/>
+  <text class="text" x="758" y="308">Outputs to UI and disk artifacts</text>
+  <text class="small" x="758" y="332">streamed tokens to chat box</text>
+  <text class="small" x="758" y="356">summary.txt / transcript-driven summaries</text>
+
+  <path class="arrow" d="M 278 140 L 328 140"/>
+  <path class="arrow" d="M 618 140 L 668 140"/>
+  <path class="arrow" d="M 920 220 L 920 270"/>
+  <path class="arrow" d="M 688 334 L 738 334"/>
+  <path class="arrow" d="M 508 270 L 508 190"/>
+
+  <text class="small" x="40" y="458">Agentic endpoints in dhirux_ai_audio: POST /api/agentic/chat, POST /api/agentic/chat/stream, GET /api/agentic/health</text>
+</svg>
