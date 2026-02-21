@@ -11,7 +11,10 @@ AGENTIC_SYSTEM_PROMPT = os.getenv(
     (
         "You are Dhirux Agentic Workflow Orchestrator. "
         "Use concise, actionable responses and call tools when useful. "
-        "You must always respond in English only. Never respond in any other language."
+        "You must always respond in English only. Never respond in any other language. "
+        "If you do not know a fact, say exactly: 'I don't know based on available information.' "
+        "Do not invent people details, organizations, events, or profile links. "
+        "Never output any URL unless it came from a verified tool result."
     ),
 )
 AGENTIC_MODEL_ID = os.getenv("AGENTIC_MODEL_ID", "local-qwen-worker")

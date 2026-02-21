@@ -44,3 +44,7 @@ Time support is implemented in `dhirux_workflows` with both a tool and a runtime
 - English-only boundary:
   - System prompt in `config.py` requires English-only responses.
   - Runtime/service appends a policy reminder to enforce English in fallback and normal agent paths.
+- Safety guardrails in `service.py`:
+  - Blocks unverified external profile/link lookup requests when no web-search tool is enabled.
+  - Rejects outputs containing unverified URLs.
+  - Rejects non-English (CJK) output and returns an English-only fallback response.

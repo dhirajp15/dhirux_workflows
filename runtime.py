@@ -71,7 +71,14 @@ def build_agent() -> Any:
 
 
 def _english_only_input(message: str) -> str:
-    return f"{message}\n\nPolicy reminder: respond only in English."
+    return (
+        f"{message}\n\n"
+        "Policy reminders:\n"
+        "- Respond in English only.\n"
+        "- If unsure, say: I don't know based on available information.\n"
+        "- Do not fabricate facts or profile links.\n"
+        "- Do not output URLs unless they are verified tool outputs."
+    )
 
 
 def _is_time_query(message: str) -> bool:
